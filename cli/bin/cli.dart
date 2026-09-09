@@ -9,7 +9,7 @@ void main(List<String> arguments) {
     cli.printUsage();
   } else if (arguments.first == 'version') {
     print('Dartpedia CLI version $version');
-  } else if (arguments.first == 'search') {
+  } else if (arguments.first == 'wikipedia') {
     /// Final variables is used when you never intend to change the variable again.
     final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
     cli.searchWikipedia(inputArgs);
