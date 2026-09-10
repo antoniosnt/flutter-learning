@@ -8,6 +8,15 @@ void main(List<String> arguments) async {
   /// This code creates a CommandRunner instance, adds the HelpCommand to it using a method cascade (..addCommand)
   /// which lets you call a method on an object directly after creating it, 
   /// and then runs the command runner with the command-line arguments.
-  var runner = CommandRunner()..addCommand(HelpCommand());
-  await runner.run(arguments);
+  var commandRunner = CommandRunner(onError: (Object error) {
+    if (error is Error) {
+      throw error;
+    }
+
+    if (error is Exception) {
+      print(error);
+    }
+  })..addCommand(HelpCommand());
+
+  commandRunner.run(arguments);
 }
