@@ -36,7 +36,9 @@ class Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Replace Container with widgets
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 500),
+      curve: Curves.bounceIn,
       width: 60,
       height: 60,
       decoration: BoxDecoration(
@@ -59,7 +61,7 @@ class Tile extends StatelessWidget {
 }
 
 class GamePage extends StatefulWidget {
-  GamePage({super.key});
+  const GamePage({super.key});
 
   @override
   State<GamePage> createState() => _GamePageState();
@@ -67,6 +69,32 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   final Game _game = Game();
+
+  /// Feedback shown below the board: erro de entrada, vitória ou derrota.
+  String? _message;
+
+  void _submitGuess(String guess) {
+    setState(() {
+      if (guess.length != 5) {
+        _message = 'A palavra precisa ter 5 letras.';
+        return;
+      }
+
+      if (!_game.isLegalGuess(guess)) {
+        _message = '"$guess" não está na lista de palavras.';
+        return;
+      }
+
+      _game.guess(guess);
+
+      _message = switch (_game) {
+        Game(didWin: true) => 'Acertou! A palavra era ${_game.hiddenWord}.',
+        Game(didLose: true) => 'Acabaram as tentativas. '
+            'A palavra era ${_game.hiddenWord}.',
+        _ => null,
+      };
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,20 +105,26 @@ class _GamePageState extends State<GamePage> {
         children: [
           for (final guess in _game.guesses)
             Row(
+              spacing: 5,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ...guess.map(
-                  (letter) => Row(children: [Tile("", HitType.none)]),
-                ),
+                ...guess.map((letter) => Tile(letter.char, letter.type)),
               ],
             ),
-          GuessInput(
-            onSubmitGuess: (guess) {
-              setState(() {
-                _game.guess(guess);
-              });
-            },
-          ),
+          if (_message case final message?)
+            Text(message, style: Theme.of(context).textTheme.titleMedium),
+          if (_game.didWin || _game.didLose)
+            FilledButton(
+              onPressed: () {
+                setState(() {
+                  _game.resetGame();
+                  _message = null;
+                });
+              },
+              child: const Text('Jogar de novo'),
+            )
+          else
+            GuessInput(onSubmitGuess: _submitGuess),
         ],
       ),
     );
