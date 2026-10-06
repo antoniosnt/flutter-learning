@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140" role="img" aria-labelledby="title description">
+  <title id="title">Flutterpedia projects</title>
+  <desc id="description">A collection of app tiles for Dart and Flutter experiments.</desc>
+  <defs>
+    <linearGradient id="tiles" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#58a6ff"/>
+      <stop offset="1" stop-color="#a371f7"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#tiles)" stroke-width="5">
+    <rect x="25" y="22" width="47" height="43" rx="9"/>
+    <rect x="88" y="22" width="47" height="43" rx="9"/>
+    <rect x="25" y="77" width="47" height="43" rx="9"/>
+    <rect x="88" y="77" width="47" height="43" rx="9"/>
+  </g>
+  <g fill="#a371f7">
+    <circle cx="48" cy="43" r="7"/>
+    <path d="M101 49h22v-6l-11-11-11 11z"/>
+    <path d="M37 105c0-8 5-13 12-13s12 5 12 13v5H37z"/>
+    <path d="M100 91h23v23h-23z"/>
+  </g>
+</svg>

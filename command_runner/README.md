@@ -1,39 +1,36 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<p align="center">
+  <img src="../assets/flutterpedia.svg" alt="Flutterpedia CLI library icon" width="140">
+</p>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+<h1 align="center">command_runner</h1>
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/tools/pub/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+<p align="center">
+  <img alt="Dart" src="https://img.shields.io/badge/library-Dart-0175C2?logo=dart&logoColor=white">
+  <img alt="Package" src="https://img.shields.io/badge/package-CLI%20utilities-8250DF">
+</p>
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+> A small Dart library for registering commands and parsing command-line arguments.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Base Command and Option types.
+- A CommandRunner that selects a command and parses its options.
+- HelpCommand for printing usage information.
+- ArgumentException for invalid command input.
 
-## Getting started
+## Use
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add the package to a Dart application's pubspec.yaml as a path dependency:
 
-## Usage
+<pre><code>dependencies:
+  command_runner:
+    path: ../command_runner</code></pre>
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Register commands with CommandRunner, then pass the process arguments to run. See the ../cli package for an example.
 
-```dart
-const like = 'sample';
-```
+## Develop
 
-## Additional information
+<pre><code>dart pub get
+dart test</code></pre>
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+The current test file is still the default package scaffold and refers to a sample class that is not defined in this package. Replace it with tests for command parsing and execution before relying on the test suite.
